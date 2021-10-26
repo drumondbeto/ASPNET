@@ -10,11 +10,21 @@ namespace ASPNET.Controllers
     public class CadastroController : ControllerBase
     {
         //POST api/cadastro
-        public ActionResult<IEnumerable<string>> CadastrarNovoUsuario(Users)
+        [HttpPost]
+        public ActionResult<IEnumerable<string>> CadastrarNovoUsuario(/*[FromBody] Users newUser*/)
         {
             using var db = new Data.ApplicationContext();
-            db.Set<Users>().Add(newUser);
+
+            var user = new Users
+            {
+                Nome = "Maicon Douglas",
+                Email = "md@md.com",
+                Senha = "nuncamaiseuvoudormir"
+            };
+
+            db.Set<Users>().Add(user);
             db.SaveChanges();
+            return Ok();
         }
     }
 }
